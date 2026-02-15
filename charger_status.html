@@ -277,9 +277,12 @@
 
     <script>
         const CHARGER_NAMES = [
-            "NSP-BRI-01", "NSP-BRI-02", "NSP-MAS-01", "NSP-MAS-02",
-            "NSP-MEM-01", "NSP-MEM-02", "NSP-MIL-01", "NSP-MIL-02",
-            "NSP-PIC-01", "NSP-PIC-02", "NSP-WHY-01", "NSP-WHY-02",
+            "NSP-BRI-01", "NSP-BRI-02",
+	    "NSP-MAS-01", "NSP-MAS-02",
+            "NSP-MEM-01", "NSP-MEM-02",
+	    "NSP-MIL-01", "NSP-MIL-02",
+            "NSP-PIC-01", "NSP-PIC-02",
+	    "NSP-WHY-01", "NSP-WHY-02",
             "NSP-WIN-01", "NSP-WIN-02"
         ];
         
@@ -312,9 +315,9 @@
             const statusClass = getStatusClass(status);
             
             return `
-                <div class="port-info">
+                <div>
+                    <span class="port-id">P${portId}</span>
                     <span class="connector-type">${connectorTypes}</span>
-                    <span class="port-id">Port ${portId}</span>
                     <span class="status ${statusClass}">${status}</span>
                 </div>
             `;
