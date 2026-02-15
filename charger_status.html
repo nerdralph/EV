@@ -9,53 +9,28 @@
             --pad: 0;
             --radius: 0;
             --h-pad: 10px 15px;
-            --h1: 1.3em;
-            --sub: 0.85em;
             --t-pad: 10px 0;
-            --t-font: 0.85em;
             --th-pad: 10px 8px;
-            --th-font: 0.9em;
             --td: 5px 8px;
             --td-grp: 2px 8px;
             --td-last: 2px 8px 5px 8px;
             --port-gap: 8px;
-            --port-pad: 6px 8px;
-            --port-font: 0.85em;
             --conn-pad: 2px 6px;
-            --conn-font: 0.8em;
-            --pid-font: 0.8em;
-            --stat-pad: 3px 8px;
-            --stat-font: 0.75em;
             --time-pad: 10px;
-            --time-font: 0.8em;
-            --btn-pad: 10px 24px;
-            --btn-font: 0.9em;
-            --btn-m: 10px;
         }
         @media (min-width: 768px) {
             :root {
                 --pad: 20px;
                 --radius: 12px;
                 --h-pad: 15px 30px;
-                --h1: 1.6em;
-                --sub: 0.95em;
                 --t-pad: 20px;
-                --t-font: 0.95em;
                 --th-pad: 15px 12px;
-                --th-font: 1em;
                 --td: 6px 12px;
                 --td-grp: 2px 12px;
                 --td-last: 2px 12px 6px 12px;
                 --port-gap: 16px;
-                --port-pad: 8px 12px;
-                --port-font: 0.9em;
                 --conn-pad: 2px 8px;
-                --conn-font: 0.85em;
-                --pid-font: 0.85em;
-                --stat-pad: 4px 12px;
-                --stat-font: 0.85em;
                 --time-pad: 15px;
-                --time-font: 0.85em;
             }
         }
 
@@ -69,7 +44,6 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: var(--pad);
-            margin: 0;
         }
         .container {
             max-width: 1400px;
@@ -86,12 +60,12 @@
             text-align: center;
         }
         h1 {
-            font-size: var(--h1);
+            font-size: 1.6em;
             margin-bottom: 5px;
         }
         .subtitle {
             opacity: 0.9;
-            font-size: var(--sub);
+            font-size: 0.95em;
         }
 
         .loading {
@@ -129,7 +103,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: var(--t-font);
+            font-size: 0.95em;
         }
         thead {
             background: #f8f9fa;
@@ -143,7 +117,7 @@
             color: #495057;
             border-bottom: 2px solid #dee2e6;
             white-space: nowrap;
-            font-size: var(--th-font);
+            font-size: 1em;
         }
         td {
             padding: var(--td);
@@ -180,9 +154,9 @@
         }
         .status {
             display: inline-block;
-            padding: var(--stat-pad);
+            padding: 4px 12px;
             border-radius: 12px;
-            font-size: var(--stat-font);
+            font-size: 0.85em;
             font-weight: 600;
             text-transform: uppercase;
         }
@@ -190,67 +164,46 @@
             background: #d4edda;
             color: #155724;
         }
-        .status.charging {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
         .status.session {
             background: #cfe2ff;
             color: #084298;
         }
-        .status.offline {
-            background: #f8d7da;
-            color: #721c24;
-        }
         .status.unavailable {
             background: #fff3cd;
             color: #856404;
-        }
-        .status.preparing {
-            background: #e7e7ff;
-            color: #4a4a9f;
         }
         .ports-container {
             display: flex;
             gap: var(--port-gap);
             flex-wrap: wrap;
         }
-        .port-info {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: var(--port-pad);
-            background: #f8f9fa;
-            border-radius: 6px;
-            font-size: var(--port-font);
-        }
         .connector-type {
             background: #e9ecef;
             padding: var(--conn-pad);
             border-radius: 4px;
-            font-size: var(--conn-font);
+            font-size: 0.85em;
         }
         .port-id {
             color: #6c757d;
-            font-size: var(--pid-font);
+            font-size: 0.85em;
         }
         .timestamp {
             text-align: center;
             padding: var(--time-pad);
             color: #6c757d;
-            font-size: var(--time-font);
+            font-size: 0.85em;
             border-top: 1px solid #e9ecef;
         }
         .refresh-btn {
             background: #667eea;
             color: white;
             border: none;
-            padding: var(--btn-pad);
+            padding: 10px 24px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: var(--btn-font);
+            font-size: 0.9em;
             font-weight: 600;
-            margin-top: var(--btn-m);
+            margin-top: 10px;
             transition: background 0.2s;
         }
         .refresh-btn:hover {
@@ -264,7 +217,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>⚡ Charger Status Dashboard</h1>
+            <h1>Charger Status Dashboard</h1>
             <p class="subtitle">Real-time status of NS Power 180 kW charging stations</p>
         </div>
         <div id="content">
@@ -287,7 +240,7 @@
         ];
         
         function getCityCode(name) {
-            return name.split('-')[1] || '';
+            return name.split('-')[1];
         }
         
         function createMapsUrl(latitude, longitude) {
@@ -299,45 +252,28 @@
         }
         
         function getRowClass(currentCity, previousCity, nextCity) {
-            if (currentCity !== nextCity && currentCity === previousCity) {
-                return 'same-city-group city-group-last';
-            }
             if (currentCity === previousCity) {
-                return 'same-city-group';
+                return currentCity !== nextCity ? 'same-city-group city-group-last' : 'same-city-group';
             }
             return '';
         }
         
         function renderPort(portData) {
-            const connectorTypes = (portData.connectorTypes || []).join(', ') || 'Unknown';
-            const portId = portData.portId || 'N/A';
-            const status = portData.status || 'unknown';
-            const statusClass = getStatusClass(status);
-            
+            const statusClass = getStatusClass(portData.status);
             return `
                 <div>
-                    <span class="port-id">P${portId}</span>
-                    <span class="connector-type">${connectorTypes}</span>
-                    <span class="status ${statusClass}">${status}</span>
+                    <span class="port-id">P${portData.portId}</span>
+                    <span class="connector-type">${portData.connectorTypes.join(', ')}</span>
+                    <span class="status ${statusClass}">${portData.status}</span>
                 </div>
             `;
         }
         
         function renderChargerRow(charger, rowClass) {
-            const {name, location, ports} = charger;
-            const city = location?.city || 'Unknown';
-            const latitude = location?.latitude;
-            const longitude = location?.longitude;
-            
-            const cityLink = latitude && longitude 
-                ? `<a href="${createMapsUrl(latitude, longitude)}" target="_blank" rel="noopener noreferrer">${city}</a>`
-                : city;
-            
-            const portsHtml = ports?.length 
-                ? `<div class="ports-container">${ports.map(renderPort).join('')}</div>`
-                : 'No ports available';
-            
-            const displayName = name ? name.substring(4) : 'N/A';
+            const {name, location: {city, latitude, longitude}, ports} = charger;
+            const cityLink = `<a href="${createMapsUrl(latitude, longitude)}" target="_blank" rel="noopener noreferrer">${city}</a>`;
+            const portsHtml = `<div class="ports-container">${ports.map(renderPort).join('')}</div>`;
+            const displayName = name.substring(4);
             const classAttr = rowClass ? ` class="${rowClass}"` : '';
             
             return `
@@ -359,23 +295,14 @@
         }
         
         function formatTimestamp(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            const hours = String(date.getHours()).padStart(2, '0');
-            const minutes = String(date.getMinutes()).padStart(2, '0');
-            const seconds = String(date.getSeconds()).padStart(2, '0');
-            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            return date.toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
         }
         
         function sortChargers(chargers) {
             chargers.sort((a, b) => {
-                const cityA = getCityCode(a.name || '');
-                const cityB = getCityCode(b.name || '');
-                if (cityA !== cityB) {
-                    return cityA.localeCompare(cityB);
-                }
-                return (a.name || '').localeCompare(b.name || '');
+                const cityA = getCityCode(a.name);
+                const cityB = getCityCode(b.name);
+                return cityA.localeCompare(cityB) || a.name.localeCompare(b.name);
             });
         }
         
@@ -394,12 +321,7 @@
             
             try {
                 const results = await Promise.all(CHARGER_NAMES.map(fetchChargerData));
-                const chargers = results.flatMap(result => result.entities || []);
-                
-                if (chargers.length === 0) {
-                    contentElement.innerHTML = '<div class="error">No charger data found.</div>';
-                    return;
-                }
+                const chargers = results.flatMap(result => result.entities);
                 
                 sortChargers(chargers);
                 const tableRows = buildTableRows(chargers);
@@ -420,7 +342,7 @@
                     </div>
                     <div class="timestamp">
                         Last updated: ${timestamp}<br>
-                        <button class="refresh-btn" onclick="loadChargers()">🔄 Refresh Data</button>
+                        <button class="refresh-btn" onclick="loadChargers()">Refresh Data</button>
                     </div>
                 `;
             } catch (error) {
