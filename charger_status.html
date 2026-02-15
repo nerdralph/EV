@@ -5,6 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charger Status Dashboard</title>
     <style>
+        :root {
+            /* Mobile-first responsive variables */
+            --body-padding: 0;
+            --container-radius: 0;
+            --header-padding: 10px 15px;
+            --h1-size: 1.3em;
+            --subtitle-size: 0.85em;
+            --table-padding: 10px 0;
+            --table-font: 0.85em;
+            --th-padding: 10px 8px;
+            --th-font: 0.9em;
+            --td-padding: 5px 8px;
+            --td-padding-grouped: 2px 8px;
+            --td-padding-last: 2px 8px 5px 8px;
+            --port-gap: 8px;
+            --port-padding: 6px 8px;
+            --port-font: 0.85em;
+            --connector-padding: 2px 6px;
+            --connector-font: 0.8em;
+            --port-id-font: 0.8em;
+            --status-padding: 3px 8px;
+            --status-font: 0.75em;
+            --timestamp-padding: 10px;
+            --timestamp-font: 0.8em;
+            --btn-padding: 8px 20px;
+            --btn-font: 0.85em;
+            --btn-margin: 8px;
+        }
+
+        @media (min-width: 768px) {
+            :root {
+                --body-padding: 20px;
+                --container-radius: 12px;
+                --header-padding: 15px 30px;
+                --h1-size: 1.6em;
+                --subtitle-size: 0.95em;
+                --table-padding: 20px;
+                --table-font: 0.95em;
+                --th-padding: 15px 12px;
+                --th-font: 1em;
+                --td-padding: 6px 12px;
+                --td-padding-grouped: 2px 12px;
+                --td-padding-last: 2px 12px 6px 12px;
+                --port-gap: 16px;
+                --port-padding: 8px 12px;
+                --port-font: 0.9em;
+                --connector-padding: 2px 8px;
+                --connector-font: 0.85em;
+                --port-id-font: 0.85em;
+                --status-padding: 4px 12px;
+                --status-font: 0.85em;
+                --timestamp-padding: 15px;
+                --timestamp-font: 0.85em;
+                --btn-padding: 10px 24px;
+                --btn-font: 0.9em;
+                --btn-margin: 10px;
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,14 +74,15 @@
             font-family: Arial, Helvetica, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: var(--body-padding);
+            margin: 0;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 12px;
+            border-radius: var(--container-radius);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
@@ -30,18 +90,18 @@
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px 30px;
+            padding: var(--header-padding);
             text-align: center;
         }
 
         h1 {
-            font-size: 1.6em;
+            font-size: var(--h1-size);
             margin-bottom: 5px;
         }
 
         .subtitle {
             opacity: 0.9;
-            font-size: 0.95em;
+            font-size: var(--subtitle-size);
         }
 
         .loading {
@@ -77,13 +137,14 @@
 
         .table-container {
             overflow-x: auto;
-            padding: 20px;
+            padding: var(--table-padding);
+            -webkit-overflow-scrolling: touch;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.95em;
+            font-size: var(--table-font);
         }
 
         thead {
@@ -93,31 +154,28 @@
         }
 
         th {
-            padding: 15px 12px;
+            padding: var(--th-padding);
             text-align: left;
             font-weight: 600;
             color: #495057;
             border-bottom: 2px solid #dee2e6;
             white-space: nowrap;
+            font-size: var(--th-font);
         }
 
         td {
-            padding: 6px 12px;
+            padding: var(--td-padding);
             border-bottom: 1px solid #e9ecef;
             vertical-align: top;
         }
 
-        tbody tr.same-city-group {
-            border-bottom: none;
-        }
-
         tbody tr.same-city-group td {
-            padding: 2px 12px;
+            padding: var(--td-padding-grouped);
             border-bottom: none;
         }
 
         tbody tr.city-group-last td {
-            padding: 2px 12px 6px 12px;
+            padding: var(--td-padding-last);
             border-bottom: 2px solid #dee2e6;
         }
 
@@ -147,9 +205,9 @@
 
         .status {
             display: inline-block;
-            padding: 4px 12px;
+            padding: var(--status-padding);
             border-radius: 12px;
-            font-size: 0.85em;
+            font-size: var(--status-font);
             font-weight: 600;
             text-transform: uppercase;
         }
@@ -186,37 +244,37 @@
 
         .ports-container {
             display: flex;
-            gap: 16px;
+            gap: var(--port-gap);
             flex-wrap: wrap;
         }
 
         .port-info {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
+            gap: 6px;
+            padding: var(--port-padding);
             background: #f8f9fa;
             border-radius: 6px;
-            font-size: 0.9em;
+            font-size: var(--port-font);
         }
 
         .connector-type {
             background: #e9ecef;
-            padding: 2px 8px;
+            padding: var(--connector-padding);
             border-radius: 4px;
-            font-size: 0.85em;
+            font-size: var(--connector-font);
         }
 
         .port-id {
             color: #6c757d;
-            font-size: 0.85em;
+            font-size: var(--port-id-font);
         }
 
         .timestamp {
             text-align: center;
-            padding: 15px;
+            padding: var(--timestamp-padding);
             color: #6c757d;
-            font-size: 0.85em;
+            font-size: var(--timestamp-font);
             border-top: 1px solid #e9ecef;
         }
 
@@ -224,12 +282,12 @@
             background: #667eea;
             color: white;
             border: none;
-            padding: 10px 24px;
+            padding: var(--btn-padding);
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: var(--btn-font);
             font-weight: 600;
-            margin-top: 10px;
+            margin-top: var(--btn-margin);
             transition: background 0.2s;
         }
 
@@ -258,21 +316,68 @@
 
     <script>
         const chargerNames = [
-            "NSP-BRI-01",
-            "NSP-BRI-02",
-            "NSP-MAS-01",
-            "NSP-MAS-02",
-            "NSP-MEM-01",
-            "NSP-MEM-02",
-            "NSP-MIL-01",
-            "NSP-MIL-02",
-            "NSP-PIC-01",
-            "NSP-PIC-02",
-            "NSP-WHY-01",
-            "NSP-WHY-02",
-            "NSP-WIN-01",
-            "NSP-WIN-02"
+            "NSP-BRI-01", "NSP-BRI-02", "NSP-MAS-01", "NSP-MAS-02",
+            "NSP-MEM-01", "NSP-MEM-02", "NSP-MIL-01", "NSP-MIL-02",
+            "NSP-PIC-01", "NSP-PIC-02", "NSP-WHY-01", "NSP-WHY-02",
+            "NSP-WIN-01", "NSP-WIN-02"
         ];
+
+        // Helper functions
+        const getCityCode = (name) => name.split('-')[1] || '';
+        
+        const createMapsUrl = (lat, lng) => 
+            `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        
+        const getStatusClass = (status) => 
+            status.toLowerCase().replace(/[^a-z]/g, '');
+        
+        const getRowClass = (currentCity, previousCity, nextCity) => {
+            if (currentCity !== nextCity && currentCity === previousCity) {
+                return 'same-city-group city-group-last';
+            }
+            if (currentCity === previousCity) {
+                return 'same-city-group';
+            }
+            return '';
+        };
+
+        const renderPort = (port) => {
+            const connectorTypes = (port.connectorTypes || []).join(', ') || 'Unknown';
+            const portId = port.portId || 'N/A';
+            const status = port.status || 'unknown';
+            const statusClass = getStatusClass(status);
+            
+            return `
+                <div class="port-info">
+                    <span class="connector-type">${connectorTypes}</span>
+                    <span class="port-id">Port ${portId}</span>
+                    <span class="status ${statusClass}">${status}</span>
+                </div>
+            `;
+        };
+
+        const renderChargerRow = (charger, rowClass) => {
+            const { name, location, ports } = charger;
+            const city = location?.city || 'Unknown';
+            const lat = location?.latitude;
+            const lng = location?.longitude;
+            
+            const cityLink = lat && lng 
+                ? `<a href="${createMapsUrl(lat, lng)}" target="_blank" rel="noopener noreferrer">${city}</a>`
+                : city;
+            
+            const portsHtml = ports?.length
+                ? `<div class="ports-container">${ports.map(renderPort).join('')}</div>`
+                : 'No ports available';
+            
+            return `
+                <tr${rowClass ? ` class="${rowClass}"` : ''}>
+                    <td class="charger-name">${name || 'N/A'}</td>
+                    <td class="location-link">${cityLink}</td>
+                    <td>${portsHtml}</td>
+                </tr>
+            `;
+        };
 
         async function fetchChargerData(name) {
             const url = `https://api-v1-blue.chargelab.io/core/v1/chargers?filter_eq[name]=${name}`;
@@ -287,126 +392,53 @@
             const content = document.getElementById('content');
             
             try {
-                // Fetch all chargers in parallel
-                const promises = chargerNames.map(name => fetchChargerData(name));
-                const results = await Promise.all(promises);
+                const results = await Promise.all(chargerNames.map(fetchChargerData));
                 
-                // Flatten and process the data using the correct schema
-                const chargers = [];
-                results.forEach(result => {
-                    if (result.entities && Array.isArray(result.entities)) {
-                        chargers.push(...result.entities);
-                    }
-                });
+                const chargers = results.flatMap(result => result.entities || []);
 
                 if (chargers.length === 0) {
                     content.innerHTML = '<div class="error">No charger data found.</div>';
                     return;
                 }
 
-                // Sort chargers by city code (3 letters after first dash)
+                // Sort by city code, then by name
                 chargers.sort((a, b) => {
-                    const getCityCode = (name) => {
-                        const parts = name.split('-');
-                        return parts.length >= 2 ? parts[1] : '';
-                    };
                     const cityA = getCityCode(a.name || '');
                     const cityB = getCityCode(b.name || '');
-                    if (cityA !== cityB) {
-                        return cityA.localeCompare(cityB);
-                    }
-                    // If same city, sort by full name
-                    return (a.name || '').localeCompare(b.name || '');
+                    return cityA !== cityB 
+                        ? cityA.localeCompare(cityB)
+                        : (a.name || '').localeCompare(b.name || '');
                 });
 
-                // Build the table
-                let html = '<div class="table-container"><table><thead><tr>';
-                html += '<th>Charger Name</th>';
-                html += '<th>Location</th>';
-                html += '<th>Ports</th>';
-                html += '</tr></thead><tbody>';
+                // Build table rows
+                const rows = chargers.map((charger, i) => {
+                    const currentCity = getCityCode(charger.name);
+                    const previousCity = i > 0 ? getCityCode(chargers[i - 1].name) : null;
+                    const nextCity = i < chargers.length - 1 ? getCityCode(chargers[i + 1].name) : null;
+                    const rowClass = getRowClass(currentCity, previousCity, nextCity);
+                    return renderChargerRow(charger, rowClass);
+                }).join('');
 
-                let previousCityCode = null;
+                const timestamp = new Date().toLocaleString();
                 
-                chargers.forEach((charger, index) => {
-                    // Extract city code (3 letters after first dash)
-                    const parts = charger.name.split('-');
-                    const cityCode = parts.length >= 2 ? parts[1] : '';
-                    
-                    // Check if next charger is in the same city
-                    const nextCharger = chargers[index + 1];
-                    const nextCityCode = nextCharger ? nextCharger.name.split('-')[1] : null;
-                    const isLastInGroup = cityCode !== nextCityCode;
-                    const isSameCityGroup = cityCode === previousCityCode;
-                    
-                    // Add appropriate class for styling
-                    let rowClass = '';
-                    if (isSameCityGroup && !isLastInGroup) {
-                        rowClass = ' class="same-city-group"';
-                    } else if (isSameCityGroup && isLastInGroup) {
-                        rowClass = ' class="same-city-group city-group-last"';
-                    } else if (!isSameCityGroup && !isLastInGroup) {
-                        rowClass = ' class="same-city-group"';
-                    }
-                    
-                    html += `<tr${rowClass}>`;
-                    
-                    // Charger name (no link)
-                    const chargerName = charger.name || 'N/A';
-                    html += `<td class="charger-name">${chargerName}</td>`;
-                    
-                    // Location with Google Maps link
-                    const latitude = charger.location?.latitude;
-                    const longitude = charger.location?.longitude;
-                    const location = charger.location?.city || 'Unknown';
-                    
-                    html += '<td class="location-link">';
-                    if (latitude && longitude) {
-                        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-                        html += `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer">${location}</a>`;
-                    } else {
-                        html += location;
-                    }
-                    html += '</td>';
-                    
-                    // Ports
-                    html += '<td>';
-                    if (charger.ports && Array.isArray(charger.ports)) {
-                        html += '<div class="ports-container">';
-                        charger.ports.forEach(port => {
-                            // connectorTypes is an array in the API response
-                            const connectorTypes = port.connectorTypes || [];
-                            const connectorType = connectorTypes.join(', ') || 'Unknown';
-                            const portId = port.portId || 'N/A';
-                            const status = port.status || 'unknown';
-                            const statusClass = status.toLowerCase().replace(/[^a-z]/g, '');
-                            
-                            html += '<div class="port-info">';
-                            html += `<span class="connector-type">${connectorType}</span>`;
-                            html += `<span class="port-id">Port ${portId}</span>`;
-                            html += `<span class="status ${statusClass}">${status}</span>`;
-                            html += '</div>';
-                        });
-                        html += '</div>';
-                    } else {
-                        html += 'No ports available';
-                    }
-                    html += '</td>';
-                    
-                    html += '</tr>';
-                    
-                    previousCityCode = cityCode;
-                });
-
-                html += '</tbody></table></div>';
-                
-                // Add timestamp and refresh button
-                const now = new Date().toLocaleString();
-                html += `<div class="timestamp">Last updated: ${now}<br>`;
-                html += '<button class="refresh-btn" onclick="loadAllChargers()">🔄 Refresh Data</button>';
-                html += '</div>';
-                
-                content.innerHTML = html;
+                content.innerHTML = `
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Charger Name</th>
+                                    <th>Location</th>
+                                    <th>Ports</th>
+                                </tr>
+                            </thead>
+                            <tbody>${rows}</tbody>
+                        </table>
+                    </div>
+                    <div class="timestamp">
+                        Last updated: ${timestamp}<br>
+                        <button class="refresh-btn" onclick="loadAllChargers()">🔄 Refresh Data</button>
+                    </div>
+                `;
                 
             } catch (error) {
                 console.error('Error loading chargers:', error);
@@ -414,7 +446,6 @@
             }
         }
 
-        // Load data on page load
         loadAllChargers();
     </script>
 </body>
