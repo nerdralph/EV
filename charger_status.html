@@ -252,10 +252,9 @@
         }
         
         function getRowClass(currentCity, previousCity, nextCity) {
-            if (currentCity === previousCity) {
-                return currentCity !== nextCity ? 'same-city-group city-group-last' : 'same-city-group';
-            }
-            return '';
+            const isGrouped = currentCity === previousCity || currentCity === nextCity;
+            if (!isGrouped) return '';
+            return currentCity !== nextCity ? 'same-city-group city-group-last' : 'same-city-group';
         }
         
         function renderPort(portData) {
