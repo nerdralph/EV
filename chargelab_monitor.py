@@ -7,8 +7,16 @@ from datetime import datetime
 # Configuration
 API_BASE_URL = "https://api-v1-blue.chargelab.io/core/v1/chargers"
 CHARGERS = [
+    "NSP-ANN-01",
+    "NSP-ANN-02",
     "NSP-BRI-01",
     "NSP-BRI-02",
+    "NSP-CHC-01",
+    "NSP-CHC-02",
+    "NSP-ING-01",
+    "NSP-ING-02",
+    "NSP-LIV-01",
+    "NSP-LIV-02",
     "NSP-MAS-01",
     "NSP-MAS-02",
     "NSP-MEM-01",
@@ -17,13 +25,19 @@ CHARGERS = [
     "NSP-MIL-02",
     "NSP-PIC-01",
     "NSP-PIC-02",
+    "NSP-SHE-01",
+    "NSP-SHE-02",
+    "NSP-TAT-01",
+    "NSP-TAT-02",
     "NSP-WHY-01",
     "NSP-WHY-02",
     "NSP-WIN-01",
-    "NSP-WIN-02"
+    "NSP-WIN-02",
+    "NSP-YAR-01",
+    "NSP-YAR-02"
 ]
 DB_NAME = "chargelab_data.db"
-QUERY_INTERVAL = 117  # seconds
+QUERY_INTERVAL = 113  # seconds
 
 def init_database():
     """Initialize the SQLite database and create table if it doesn't exist."""
@@ -119,12 +133,12 @@ def store_data(charger_name, timestamp, response_data):
     return stored_any
 
 def main():
-    """Main loop to query API and store data every 3 minutes."""
+    """Main loop to query API and store data"""
     print("Starting Chargelab API Monitor...")
     print(f"Monitoring {len(CHARGERS)} chargers:")
     for charger in CHARGERS:
         print(f"  - {charger}")
-    print(f"Interval: {QUERY_INTERVAL} seconds (2 minutes)")
+    print(f"Interval: {QUERY_INTERVAL} seconds")
     print("Press Ctrl+C to stop\n")
     
     init_database()
